@@ -1,0 +1,78 @@
+.header {
+	display: grid;
+}
+.header_select_container {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.header_nav_ul {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+}
+/* view transition API */
+::view-transition-group(root) {
+	animation: none;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+}
+/* this to reduce? jugging */
+::view-transition {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+}
+/* *** */
+.header {
+	view-transition-name: headerName;
+	/* contain: layout paint; */
+}
+.app,
+.main,
+.footer {
+	/* contain: layout paint; */
+}
+/* this also to reduce? jugging */
+::view-transition-group(headerName) {
+	/* mix-blend-mode: normal; */
+	/* animation: none; */
+	/* transform: none; */
+}
+/* actual animation */
+/* ::view-transition-old(headerName),
+::view-transition-new(headerName) {
+	animation-duration: 20000ms;
+} */
+::view-transition-old(headerName) {
+	animation: fade-out 300ms ease forwards;
+}
+::view-transition-new(headerName) {
+	animation: fade-in 300ms ease forwards;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+/* ::view-transition-old(headerName) {
+	outline: 5px solid red;
+}
+
+::view-transition-new(headerName) {
+	outline: 5px solid blue;
+} */

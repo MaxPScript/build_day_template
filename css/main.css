@@ -1,0 +1,31 @@
+.main_hero_image {
+	display: block;
+	width: 100%;
+}
+.visible {
+	display: block;
+}
+.hidden {
+	display: none;
+}
+.results_table {
+	display: block;
+	width: min-content;
+	margin: auto;
+	border: 1px solid;
+	border-collapse: collapse;
+	th,
+	td {
+		padding: 0.2em 1em;
+		width: fit-content;
+		border: 1px solid;
+		border-collapse: collapse;
+	}
+	caption {
+		display: grid;
+		place-items: center;
+		.results_table_caption_sport {
+			font-size: 2em;
+		}
+	}
+}

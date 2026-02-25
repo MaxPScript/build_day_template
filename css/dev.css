@@ -1,0 +1,14 @@
+.dev_border_160 {
+	border: 10px dashed hsl(160 100 25 / 0.8);
+}
+.dev_border_280 {
+	border: 10px dashed hsl(280 100 25 / 0.8);
+}
+.dev_border_40 {
+	border: 10px dashed hsl(40 100 25 / 0.8);
+}
+/* *** */
+.dev_js {
+	color: hsl(80 3 19 / 1);
+	background-color: hsl(52 84 63 / 1);
+}

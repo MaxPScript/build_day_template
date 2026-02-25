@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>BDTemplate</title>
+		<link
+			rel="stylesheet"
+			href="./css/reset.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/typography.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/dev.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/app.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/header.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/main.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/footer.css"
+		/>
+	</head>
+	<body>
+		<div class="app">
+			<header class="header">
+				<p>
+					<span> Быстрее </span>
+					<span> Выше </span>
+					<span> Сильнее </span>
+				</p>
+				<h1>
+					День строителя в Сычёво
+					<hr />
+					<span
+						class="header_span_day"
+						id="header_span_day_id"
+						>День</span
+					>
+					<span
+						class="header_span_date"
+						id="header_span_date_id"
+						>Число</span
+					>
+					<span
+						class="header_span_month"
+						id="header_span_month_id"
+						>Месяц</span
+					>
+					<span
+						class="header_span_year"
+						id="header_span_year_id"
+						>Год</span
+					>
+				</h1>
+				<h2>
+					<span
+						class="header_span_info"
+						id="header_span_info_id"
+					>
+						дополнительная информация
+					</span>
+				</h2>
+				<nav class="nav">
+					<ul class="header_nav_ul">
+						<li>Стартовая стр.</li>
+						<li>Результаты</li>
+						<li>Галерея</li>
+						<li class="header_select_container">
+							<label for="header_select_id">Год</label>
+							<select
+								class="header_select"
+								id="header_select_id"
+							>
+								<option value="2024">2024</option>
+								<option value="2025">2025</option>
+								<option value="2026">2026</option>
+							</select>
+						</li>
+					</ul>
+				</nav>
+				<div class="header_select_container">
+					<!-- <label for="header_select_id">Год</label>
+					<select
+						class="header_select"
+						id="header_select_id"
+					>
+						<option value="2024">2024</option>
+						<option value="2025">2025</option>
+						<option value="2026">2026</option>
+					</select> -->
+				</div>
+			</header>
+			<main class="main">
+				<section
+					class="results"
+					id="results_2024"
+				>
+					<!-- <h2>Результаты<span id="results_year"></span></h2>
+					<table class="results_table">
+						<thead>
+							<tr>
+								<th>Команда</th>
+								<th>Место</th>
+							</tr>
+						</thead>
+						<tbody id="results_body"></tbody>
+					</table> -->
+				</section>
+				<section class="hero">
+					<img
+						class="main_hero_image"
+						src="./assets/images/hero.webp"
+						alt="hero image"
+						srcset=""
+					/>
+				</section>
+			</main>
+			<footer class="footer">
+				<span class="copyright"> 2026 © WebDev </span>
+				<a
+					href="#"
+					class="footer_alink"
+				>
+					<img
+						src="./assets/icons/wa.svg"
+						alt="whatsapp icon"
+					/>
+				</a>
+				<span>+7(926)604-66-41</span>
+			</footer>
+		</div>
+	</body>
+	<script
+		type="module"
+		src="./js/app.js"
+	></script>
+</html>
