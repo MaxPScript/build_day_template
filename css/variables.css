@@ -1,0 +1,25 @@
+/* css/variables.css */
+:root {
+	/* Primary - Builder's Day theme */
+	--color-primary: hsl(35, 80%, 55%); /* Orange - energy, construction */
+	--color-primary-dark: hsl(35, 80%, 40%); /* Dark orange */
+
+	/* Secondary - Nature/Summer */
+	--color-secondary: hsl(142, 50%, 45%); /* Green - outdoor, grass */
+	--color-secondary-dark: hsl(142, 50%, 30%);
+
+	/* Neutrals */
+	--color-bg: hsl(45, 70%, 92%); /* Warm off-white */
+	--color-bg-dark: hsl(45, 30%, 85%); /* Darker beige */
+	--color-text: hsl(30, 20%, 20%); /* Dark brown */
+	--color-text-light: hsl(30, 10%, 40%); /* Lighter brown */
+
+	/* Accents */
+	--color-accent: hsl(200, 60%, 55%); /* Blue - water/cool */
+	--color-border: hsl(30, 20%, 70%); /* Light brown border */
+
+	/* Functional */
+	--color-success: hsl(120, 50%, 50%); /* Green - 1st place */
+	--color-silver: hsl(0, 0%, 70%); /* Gray - 2nd place */
+	--color-bronze: hsl(25, 60%, 50%); /* Bronze - 3rd place */
+}

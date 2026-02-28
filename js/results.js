@@ -12,7 +12,6 @@ export async function renderResults(year) {
 	const lines = textDecoded.trim().split("\n");
 	console.log("Lines:", lines);
 
-	// State machine to track current section
 	let currentSport = "";
 	let currentTournament = "";
 	let currentHeaders = [];
@@ -24,7 +23,6 @@ export async function renderResults(year) {
 		const type = cells[0]?.trim();
 
 		if (type === "Sport") {
-			// Save previous table if exists
 			if (currentHeaders.length > 0 && currentRows.length > 0) {
 				tables.push({
 					sport: currentSport,
@@ -33,13 +31,11 @@ export async function renderResults(year) {
 					rows: currentRows,
 				});
 			}
-			// New sport
 			currentSport = cells[1]?.trim() || "";
 			currentTournament = "";
 			currentHeaders = [];
 			currentRows = [];
 		} else if (type === "Tournament") {
-			// Save previous table if exists
 			if (currentHeaders.length > 0 && currentRows.length > 0) {
 				tables.push({
 					sport: currentSport,
@@ -53,17 +49,14 @@ export async function renderResults(year) {
 			currentRows = [];
 		} else if (type === "Headers") {
 			currentHeaders = cells.slice(1).map((h) => h.trim());
-			// .filter((h) => h);
 		} else if (type === "Row") {
 			const rowData = cells.slice(1).map((c) => c.trim());
-			// .filter((c) => c);
 			if (rowData.length > 0) {
 				currentRows.push(rowData);
 			}
 		}
 	}
 
-	// Save last table
 	if (currentHeaders.length > 0 && currentRows.length > 0) {
 		tables.push({
 			sport: currentSport,
@@ -81,6 +74,13 @@ export async function renderResults(year) {
 		return;
 	}
 
+	function getPlaceClass(place) {
+		if (place === "1") return "place-1";
+		if (place === "2") return "place-2";
+		if (place === "3") return "place-3";
+		return "";
+	}
+
 	section.innerHTML = tables
 		.map(
 			(table) => `
@@ -94,17 +94,34 @@ export async function renderResults(year) {
 					${table.headers.map((h) => `<th>${h}</th>`).join("")}
 				</tr>
 			</thead>
+
+
+
+
 			<tbody>
 				${table.rows
-					.map(
-						(row) => `
-					<tr>
-						${row.map((cell) => `<td>${cell}</td>`).join("")}
-					</tr>
-				`,
-					)
+					.map((row) => {
+						const placeClass = getPlaceClass(row[0]);
+						return `
+							<tr>
+								${row
+									.map((cell, index) => {
+										const className =
+											index === row.length - 1 && placeClass ? placeClass : "";
+										return `<td${className ? ` class="${className}"` : ""}>${cell}</td>`;
+									})
+									.join("")}
+							</tr>
+						`;
+					})
 					.join("")}
 			</tbody>
+
+
+
+
+
+
 		</table>
 	`,
 		)
