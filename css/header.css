@@ -76,3 +76,6 @@
 ::view-transition-new(headerName) {
 	outline: 5px solid blue;
 } */
+.header_marquee {
+	font-size: 1rem;
+}
