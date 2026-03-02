@@ -1,11 +1,20 @@
 .app {
-	max-width: 1440px;
-	margin: auto;
-	background: blanchedalmond;
-	background-color: var(--color-bg);
-	color: var(--color-text);
-	/* font-size: clamp(1rem, -0.875rem + 8.333333vw, 3.5rem); */
-	/* https://modern-fluid-typography.vercel.app?rootFontSize=16&minSize=24&fluidSize=2&relativeSize=1&maxSize=36 */
-	/* clamp(1.5rem, 2vw + 1rem, 2.25rem); */
-	/* font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem); */
+  font-family: "Inter", Arial, sans-serif;
+  font-family: "PT Sans", Arial, sans-serif;
+  /* font-family: "Source Sans 3", Arial, sans-serif; */
+  max-width: 1440px;
+  margin: auto;
+  background: #ffebcd;
+  background-color: var(--color-bg);
+  background-image: var(--noise-bg), var(--gradient-radial);
+  /* filter: url(#a); */
+  color: var(--color-text);
+  /* font-size: clamp(1rem, -0.875rem + 8.333333vw, 3.5rem); */
+  /* https://modern-fluid-typography.vercel.app?rootFontSize=16&minSize=24&fluidSize=2&relativeSize=1&maxSize=36 */
+  /* clamp(1.5rem, 2vw + 1rem, 2.25rem); */
+  /* font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem); */
+  button {
+    font-family: "Oswald", Arial, sans-serif;
+    font-weight: 500;
+  }
 }

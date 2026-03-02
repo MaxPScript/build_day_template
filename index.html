@@ -1,113 +1,208 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>BDTemplate</title>
-		<link
-			rel="stylesheet"
-			href="./css/reset.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/variables.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/typography.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/dev.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/app.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/header.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/main.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="./css/footer.css"
-		/>
-	</head>
-	<body>
-		<div class="app">
-			<header class="header">
-				<p>
-					<span> Быстрее </span>
-					<span> Выше </span>
-					<span> Сильнее </span>
-				</p>
-				<h1>
-					День строителя в Сычёво
-					<hr />
-					<marquee
-						class="header_marquee"
-						behavior=""
-						direction=""
-					>
-						При поддержке администрации
-					</marquee>
-					<hr />
-					<span
-						class="header_span_day"
-						id="header_span_day_id"
-						>День</span
-					>
-					<span
-						class="header_span_date"
-						id="header_span_date_id"
-						>Число</span
-					>
-					<span
-						class="header_span_month"
-						id="header_span_month_id"
-						>Месяц</span
-					>
-					<span
-						class="header_span_year"
-						id="header_span_year_id"
-						>Год</span
-					>
-				</h1>
-				<h2>
-					<span
-						class="header_span_info"
-						id="header_span_info_id"
-					>
-						дополнительная информация
-					</span>
-				</h2>
-				<nav class="nav">
-					<ul class="header_nav_ul">
-						<li>Стартовая стр.</li>
-						<li>Результаты</li>
-						<li>Галерея</li>
-						<li class="header_select_container">
-							<label for="header_select_id">Год</label>
-							<select
-								class="header_select"
-								id="header_select_id"
-							>
-								<option value="2024">2024</option>
-								<option value="2025">2025</option>
-								<option value="2026">2026</option>
-							</select>
-						</li>
-					</ul>
-				</nav>
-				<div class="header_select_container">
-					<!-- <label for="header_select_id">Год</label>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BDTemplate</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/typography.css" />
+    <link rel="stylesheet" href="./css/dev.css" />
+    <link rel="stylesheet" href="./css/app.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+
+  </head>
+  <body>
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <filter id="a">
+    <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="5" stitchTiles="stitch" result="noise"/>
+    <feComponentTransfer in="noise" result="thresholded">
+      <feFuncA type="discrete" tableValues="0 0 0 0 1 1 1 1"/>
+    </feComponentTransfer>
+    <feFlood flood-color="#2b0d4a" result="color"/>
+    <feComposite in="color" in2="thresholded" operator="in"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#a)" opacity=".3"/>
+</svg>
+	<svg width="400" height="200">
+
+  <defs>
+    <filter id="noiseDisplace1">
+
+      <feTurbulence
+        type="turbulence"
+        baseFrequency="0.02"
+        numOctaves="2"
+        result="noise"/>
+
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="noise"
+        scale="20"
+        xChannelSelector="R"
+        yChannelSelector="G"/>
+
+    </filter>
+  </defs>
+
+  <text x="50" y="100"
+        font-size="50"
+        filter="url(#noiseDisplace1)">
+    SVG
+  </text>
+
+</svg>
+<svg width="400" height="200">
+
+  <defs>
+
+    <filter id="waterRipple">
+
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.01"
+        numOctaves="3"
+        result="noise"/>
+
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="noise"
+        scale="40"/>
+
+    </filter>
+
+  </defs>
+
+  <rect
+    x="50"
+    y="50"
+    width="300"
+    height="100"
+    fill="lightblue"
+    filter="url(#waterRipple)"/>
+
+</svg>
+<svg width="400" height="200">
+
+  <defs>
+
+    <filter id="glitchNoise">
+
+      <feTurbulence
+        type="turbulence"
+        baseFrequency="0.1"
+        numOctaves="1"
+        result="noise"/>
+
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="noise"
+        scale="60"/>
+
+    </filter>
+
+  </defs>
+
+  <image
+    href="https://picsum.photos/300/150"
+    x="50"
+    y="25"
+    width="300"
+    height="150"
+    filter="url(#glitchNoise)"/>
+
+</svg>
+<svg width="400" height="200">
+
+<defs>
+
+<filter id="animatedNoise">
+
+<feTurbulence
+    type="fractalNoise"
+    baseFrequency="0.01"
+    numOctaves="2"
+    seed="2"
+    result="noise">
+
+	<!-- attributeName="ceed"
+	values="1;2" -->
+    <animate
+	attributeName="baseFrequency"
+	values="0.01;0.02"
+        dur="10s"
+        repeatCount="indefinite"/>
+
+</feTurbulence>
+
+<feDisplacementMap
+    in="SourceGraphic"
+    in2="noise"
+    scale="8"/>
+
+</filter>
+
+</defs>
+
+<text x="50" y="100"
+      font-size="50"
+      filter="url(#animatedNoise)">
+Animated
+</text>
+
+</svg>
+    <div class="app">
+      <header class="header">
+        <p class="header_slogan">
+          <span> Быстрее! </span>
+          <span> Выше! </span>
+          <span> Сильнее! </span>
+        </p>
+        <h1>
+          День строителя в Сычёво
+          <hr />
+          <marquee class="header_marquee" behavior="" direction="">
+            При поддержке администрации
+          </marquee>
+          <hr />
+          <span class="header_span_day" id="header_span_day_id">День</span>
+          <span class="header_span_date" id="header_span_date_id">Число</span>
+          <span class="header_span_month" id="header_span_month_id">Месяц</span>
+          <span class="header_span_year" id="header_span_year_id">Год</span>
+        </h1>
+        <h2>
+          <span class="header_span_info" id="header_span_info_id">
+            дополнительная информация
+          </span>
+        </h2>
+        <nav class="header_nav">
+          <ul class="header_nav_ul">
+            <li><a href="#">Стартовая стр.</li></a>
+            <li><a href="#">Результаты</li></a>
+            <li><a href="#">Галерея</li></a>
+            <li class="header_select_container">
+              <label for="header_select_id">Год</label>
+              <select class="header_select" id="header_select_id">
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+              </select>
+            </li>
+          </ul>
+        </nav>
+        <div class="header_select_container">
+          <!-- <label for="header_select_id">Год</label>
 					<select
 						class="header_select"
 						id="header_select_id"
@@ -116,14 +211,11 @@
 						<option value="2025">2025</option>
 						<option value="2026">2026</option>
 					</select> -->
-				</div>
-			</header>
-			<main class="main">
-				<section
-					class="results"
-					id="results_2024"
-				>
-					<!-- <h2>Результаты<span id="results_year"></span></h2>
+        </div>
+      </header>
+      <main class="main">
+        <section class="results" id="results_2024">
+          <!-- <h2>Результаты<span id="results_year"></span></h2>
 					<table class="results_table">
 						<thead>
 							<tr>
@@ -133,33 +225,24 @@
 						</thead>
 						<tbody id="results_body"></tbody>
 					</table> -->
-				</section>
-				<section class="hero">
-					<img
-						class="main_hero_image"
-						src="./assets/images/hero.webp"
-						alt="hero image"
-						srcset=""
-					/>
-				</section>
-			</main>
-			<footer class="footer">
-				<span class="copyright"> 2026 © WebDev </span>
-				<a
-					href="#"
-					class="footer_alink"
-				>
-					<img
-						src="./assets/icons/wa.svg"
-						alt="whatsapp icon"
-					/>
-				</a>
-				<span>+7(926)604-66-41</span>
-			</footer>
-		</div>
-	</body>
-	<script
-		type="module"
-		src="./js/app.js"
-	></script>
+        </section>
+        <section class="hero">
+          <img
+            class="main_hero_image"
+            src="./assets/images/hero.webp"
+            alt="hero image"
+            srcset=""
+          />
+        </section>
+      </main>
+      <footer class="footer">
+        <span class="copyright"> 2026 © WebDev </span>
+        <a href="#" class="footer_alink">
+          <img src="./assets/icons/wa.svg" alt="whatsapp icon" />
+        </a>
+        <span>+7(926)604-66-41</span>
+      </footer>
+    </div>
+  </body>
+  <script type="module" src="./js/app.js"></script>
 </html>
