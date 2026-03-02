@@ -4,15 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BDTemplate</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:wght@400;700&family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/variables.css" />
     <link rel="stylesheet" href="./css/typography.css" />
@@ -21,147 +30,36 @@
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/footer.css" />
-
   </head>
   <body>
-    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-  <filter id="a">
-    <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="5" stitchTiles="stitch" result="noise"/>
-    <feComponentTransfer in="noise" result="thresholded">
-      <feFuncA type="discrete" tableValues="0 0 0 0 1 1 1 1"/>
-    </feComponentTransfer>
-    <feFlood flood-color="#2b0d4a" result="color"/>
-    <feComposite in="color" in2="thresholded" operator="in"/>
-  </filter>
-  <rect width="100%" height="100%" filter="url(#a)" opacity=".3"/>
-</svg>
-	<svg width="400" height="200">
-
-  <defs>
-    <filter id="noiseDisplace1">
-
-      <feTurbulence
-        type="turbulence"
-        baseFrequency="0.02"
-        numOctaves="2"
-        result="noise"/>
-
-      <feDisplacementMap
-        in="SourceGraphic"
-        in2="noise"
-        scale="20"
-        xChannelSelector="R"
-        yChannelSelector="G"/>
-
-    </filter>
-  </defs>
-
-  <text x="50" y="100"
-        font-size="50"
-        filter="url(#noiseDisplace1)">
-    SVG
-  </text>
-
-</svg>
-<svg width="400" height="200">
-
-  <defs>
-
-    <filter id="waterRipple">
-
-      <feTurbulence
-        type="fractalNoise"
-        baseFrequency="0.01"
-        numOctaves="3"
-        result="noise"/>
-
-      <feDisplacementMap
-        in="SourceGraphic"
-        in2="noise"
-        scale="40"/>
-
-    </filter>
-
-  </defs>
-
-  <rect
-    x="50"
-    y="50"
-    width="300"
-    height="100"
-    fill="lightblue"
-    filter="url(#waterRipple)"/>
-
-</svg>
-<svg width="400" height="200">
-
-  <defs>
-
-    <filter id="glitchNoise">
-
-      <feTurbulence
-        type="turbulence"
-        baseFrequency="0.1"
-        numOctaves="1"
-        result="noise"/>
-
-      <feDisplacementMap
-        in="SourceGraphic"
-        in2="noise"
-        scale="60"/>
-
-    </filter>
-
-  </defs>
-
-  <image
-    href="https://picsum.photos/300/150"
-    x="50"
-    y="25"
-    width="300"
-    height="150"
-    filter="url(#glitchNoise)"/>
-
-</svg>
-<svg width="400" height="200">
-
-<defs>
-
-<filter id="animatedNoise">
-
-<feTurbulence
-    type="fractalNoise"
-    baseFrequency="0.01"
-    numOctaves="2"
-    seed="2"
-    result="noise">
-
-	<!-- attributeName="ceed"
+    <svg width="400" height="200">
+      <defs>
+        <filter id="animatedNoise">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.01"
+            numOctaves="2"
+            seed="2"
+            result="noise"
+          >
+            <!-- attributeName="ceed"
 	values="1;2" -->
-    <animate
-	attributeName="baseFrequency"
-	values="0.01;0.02"
-        dur="10s"
-        repeatCount="indefinite"/>
+            <animate
+              attributeName="baseFrequency"
+              values="0.01;0.02"
+              dur="10s"
+              repeatCount="indefinite"
+            />
+          </feTurbulence>
 
-</feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
+        </filter>
+      </defs>
 
-<feDisplacementMap
-    in="SourceGraphic"
-    in2="noise"
-    scale="8"/>
-
-</filter>
-
-</defs>
-
-<text x="50" y="100"
-      font-size="50"
-      filter="url(#animatedNoise)">
-Animated
-</text>
-
-</svg>
+      <text x="50" y="100" font-size="50" filter="url(#animatedNoise)">
+        Animated
+      </text>
+    </svg>
     <div class="app">
       <header class="header">
         <p class="header_slogan">
@@ -188,9 +86,9 @@ Animated
         </h2>
         <nav class="header_nav">
           <ul class="header_nav_ul">
-            <li><a href="#">Стартовая стр.</li></a>
-            <li><a href="#">Результаты</li></a>
-            <li><a href="#">Галерея</li></a>
+            <li><a href="#">Стартовая стр.</a></li>
+            <li><a href="#">Результаты</a></li>
+            <li><a href="#">Галерея</a></li>
             <li class="header_select_container">
               <label for="header_select_id">Год</label>
               <select class="header_select" id="header_select_id">
