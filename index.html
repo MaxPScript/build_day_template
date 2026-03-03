@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="./css/footer.css" />
   </head>
   <body>
-    <svg width="400" height="200">
+    <svg width="0" height="0" style="position: absolute">
       <defs>
         <filter id="animatedNoise">
           <feTurbulence
@@ -56,9 +56,9 @@
         </filter>
       </defs>
 
-      <text x="50" y="100" font-size="50" filter="url(#animatedNoise)">
+      <!-- <text x="50" y="100" font-size="50" filter="url(#animatedNoise)">
         Animated
-      </text>
+      </text> -->
     </svg>
     <div class="app">
       <header class="header">
@@ -69,21 +69,23 @@
         </p>
         <h1>
           День строителя в Сычёво
-          <hr />
-          <marquee class="header_marquee" behavior="" direction="">
-            При поддержке администрации
-          </marquee>
-          <hr />
+          <!-- <hr /> -->
+        </h1>
+        <marquee class="header_marquee" behavior="" direction="" scrollamount="3">
+          При поддержке администрации Волоколамского района
+        </marquee>
+        <!-- <hr /> -->
+        <h2>
           <span class="header_span_day" id="header_span_day_id">День</span>
           <span class="header_span_date" id="header_span_date_id">Число</span>
           <span class="header_span_month" id="header_span_month_id">Месяц</span>
           <span class="header_span_year" id="header_span_year_id">Год</span>
-        </h1>
-        <h2>
+        </h2>
+        <p>
           <span class="header_span_info" id="header_span_info_id">
             дополнительная информация
           </span>
-        </h2>
+        </p>
         <nav class="header_nav">
           <ul class="header_nav_ul">
             <li><a href="#">Стартовая стр.</a></li>
@@ -99,7 +101,7 @@
             </li>
           </ul>
         </nav>
-        <div class="header_select_container">
+        <!-- <div class="header_select_container"> -->
           <!-- <label for="header_select_id">Год</label>
 					<select
 						class="header_select"
