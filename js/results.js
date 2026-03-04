@@ -1,24 +1,33 @@
 export async function renderResults(year) {
-  const response = await fetch(`js/results_${year}.csv`);
-  const arrayBuffer = await response.arrayBuffer();
-
-  let textDecoded;
-  try {
-    textDecoded = new TextDecoder("utf-8", { fatal: true }).decode(arrayBuffer);
-  } catch {
-    textDecoded = new TextDecoder("windows-1251").decode(arrayBuffer);
-  }
-
-  const lines = textDecoded.trim().split("\n");
-  console.log("Lines:", lines);
-
+  let arrayOfLinesFromExcelRows = [];
   let currentSport = "";
   let currentTournament = "";
   let currentHeaders = [];
   let currentRows = [];
   let tables = [];
+  async function getArrayOfLinesFromExcelRows() {
+    const response = await fetch(`js/results_${year}.csv`);
+    const arrayBuffer = await response.arrayBuffer();
+    let textDecoded;
+    try {
+      textDecoded = new TextDecoder("utf-8", { fatal: true }).decode(
+        arrayBuffer
+      );
+    } catch {
+      textDecoded = new TextDecoder("windows-1251").decode(arrayBuffer);
+    }
+    arrayOfLinesFromExcelRows = textDecoded.trim().split("\n");
+    console.log("arrayOfLinesFromExcelRows:", arrayOfLinesFromExcelRows);
+  }
+  getArrayOfLinesFromExcelRows();
+  //
 
-  for (const line of lines) {
+  // if (arrayOfLinesFromExcelRows.length === 0) {
+  //   console.log("Where lines?");
+  // } else {
+  //   console.log(arrayOfLinesFromExcelRows.length);
+  // }
+  for (const line of arrayOfLinesFromExcelRows) {
     const cells = line.split(",");
     const type = cells[0]?.trim();
 
@@ -81,9 +90,10 @@ export async function renderResults(year) {
     return "";
   }
 
-  section.innerHTML = tables
-    .map(
-      (table) => `
+  function setInnerHTML(el) {
+    el.innerHTML = tables
+      .map(
+        (table) => `
 		<table class="results_table">
 			<caption>
 				<span class="results_table_caption_sport">${table.sport}</span>
@@ -94,10 +104,6 @@ export async function renderResults(year) {
 					${table.headers.map((h) => `<th>${h}</th>`).join("")}
 				</tr>
 			</thead>
-
-
-
-
 			<tbody>
 				${table.rows
           .map((row) => {
@@ -116,14 +122,10 @@ export async function renderResults(year) {
           })
           .join("")}
 			</tbody>
-
-
-
-
-
-
 		</table>
 	`
-    )
-    .join("");
+      )
+      .join("");
+  }
+  setInnerHTML(section);
 }
