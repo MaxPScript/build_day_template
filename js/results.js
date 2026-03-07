@@ -1,7 +1,28 @@
 export async function renderResults(year) {
   const text = await loadCSV(year);
-
-  const lines = splitLines(text);
+  console.log(text);
+  // test_1.innerText = text;
+  // test_2.innerHTML = text;
+  // test_3.textContent = text;
+  // const lines = splitLines(text);
+  let lines = splitLines(text);
+  console.log(lines);
+  // We handle the “error” of parsing an Excel cell with a line break inside
+  lines = ((lines) => {
+    let res = [];
+    let buffer = "";
+    lines.forEach((line) => {
+      buffer += (buffer === "" ? "" : "\n") + line;
+      const quoteCount = (buffer.match(/"/g) || []).length;
+      if (quoteCount % 2 === 0) {
+        res.push(buffer);
+        buffer = "";
+      }
+    });
+    return res;
+  })(lines);
+  console.log(lines);
+  //
 
   const tables = parseTables(lines);
 
@@ -44,7 +65,9 @@ export async function renderResults(year) {
   }
 
   function parseRow(cells) {
-    return cells.slice(1).map((c) => c.trim());
+    const _cells = cells.slice(1).map((c) => c.trim().replaceAll('"', ""));
+    console.log(_cells);
+    return _cells;
   }
 
   /* =========================
@@ -151,7 +174,7 @@ ${row
     const className = index === row.length - 1 && placeClass ? placeClass : "";
 
     return `<td class="${className}">
-${cell}
+${cell.replaceAll("\n", "<br>")}
 </td>`;
   })
   .join("")}

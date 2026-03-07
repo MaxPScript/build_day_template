@@ -1,35 +1,49 @@
 import { renderHeader } from "./header.js";
 import { renderResults } from "./results.js";
-renderResults(2024);
+// import { renderResults } from "./results.js";
+// renderResults(2024);
+import { initRouter } from "./router.js";
 //
-// helper function to hide/reveal element
-function toggleClass(el) {
-	if (!el) {
-		console.log(`Can't found ${el}`);
-	} else {
-		el.toggleClass(".hidden");
-	}
-}
-// initial header rendering
 const select = document.getElementById("header_select_id");
+// helper function to hide/reveal element
+// function toggleClass(el) {
+// 	if (!el) {
+// 		console.log(`Can't found ${el}`);
+// 	} else {
+// 		el.toggleClass(".hidden");
+// 	}
+// }
+// initial header rendering
 renderHeader(select.value);
+// start router
+initRouter(select);
 // update header when user select year
-function updateHeader(selectYear) {
-	if (!document.startViewTransition) {
-		renderHeader(selectYear);
-		return;
-	}
-	document.startViewTransition(() => {
-		renderHeader(selectYear);
-	});
-}
 select.addEventListener("change", (e) => {
-	updateHeader(e.target.value);
+  const year = e.target.value;
+  updateHeader(year);
+  if (location.hash === "#results") {
+    import("./results.js").then(({ renderResults }) => {
+      renderResults(year);
+    });
+  }
 });
+
+function updateHeader(year) {
+  if (!document.startViewTransition) {
+    renderHeader(year);
+    return;
+  }
+  document.startViewTransition(() => {
+    renderHeader(year);
+  });
+}
+// select.addEventListener("change", (e) => {
+//   updateHeader(e.target.value);
+// });
 //
 //
 
-let resultsData = {};
+// let resultsData = {};
 
 //
 // function renderResults(year) {
@@ -52,10 +66,7 @@ let resultsData = {};
 // 		.join("");
 // }
 //
-select.addEventListener("change", (e) => {
-	// updateHeader(e.target.value);
-	renderResults(e.target.value);
-});
+
 // loadResultsFromCSV("2024").then((data) => {
 // 	resultsData = data;
 // 	console.log(data);

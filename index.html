@@ -67,14 +67,15 @@
           <span> Выше! </span>
           <span> Сильнее! </span>
         </p>
-        <h1>
-          День строителя в Сычёво
-          <!-- <hr /> -->
-        </h1>
-        <marquee class="header_marquee" behavior="" direction="" scrollamount="3">
+        <h1>День строителя в Сычёво</h1>
+        <marquee
+          class="header_marquee"
+          behavior=""
+          direction=""
+          scrollamount="3"
+        >
           При поддержке администрации Волоколамского района
         </marquee>
-        <!-- <hr /> -->
         <h2>
           <span class="header_span_day" id="header_span_day_id">День</span>
           <span class="header_span_date" id="header_span_date_id">Число</span>
@@ -88,9 +89,9 @@
         </p>
         <nav class="header_nav">
           <ul class="header_nav_ul">
-            <li><a href="#">Стартовая стр.</a></li>
-            <li><a href="#">Результаты</a></li>
-            <li><a href="#">Галерея</a></li>
+            <li><a href="#home">Стартовая стр.</a></li>
+            <li><a href="#results">Результаты</a></li>
+            <li><a href="#gallery">Галерея</a></li>
             <li class="header_select_container">
               <label for="header_select_id">Год</label>
               <select class="header_select" id="header_select_id">
@@ -101,32 +102,24 @@
             </li>
           </ul>
         </nav>
-        <!-- <div class="header_select_container"> -->
-          <!-- <label for="header_select_id">Год</label>
-					<select
-						class="header_select"
-						id="header_select_id"
-					>
-						<option value="2024">2024</option>
-						<option value="2025">2025</option>
-						<option value="2026">2026</option>
-					</select> -->
-        </div>
       </header>
       <main class="main">
-        <section class="results" id="results_2024">
-        </section>
-        <section class="results" id="results_2025">
-        </section>
-        <section class="results" id="results_2026">
-        </section>
-        <section class="hero">
+        <!-- <p id="test_1">test 1</p>
+        <p id="test_2">test 2</p>
+        <p id="test_3">test 3</p> -->
+        <section class="hero" id="home">
           <img
             class="main_hero_image"
             src="./assets/images/hero.webp"
             alt="hero image"
             srcset=""
           />
+        </section>
+        <section class="results hidden" id="results_2024"></section>
+        <section class="results hidden" id="results_2025"></section>
+        <section class="results hidden" id="results_2026"></section>
+        <section class="gallery hidden" id="gallery">
+          <p>Gallery coming soon...</p>
         </section>
       </main>
       <footer class="footer">
