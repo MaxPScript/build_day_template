@@ -1,142 +1,158 @@
 export async function renderResults(year) {
-  const text = await loadCSV(year);
-  console.log(text);
-  // test_1.innerText = text;
-  // test_2.innerHTML = text;
-  // test_3.textContent = text;
-  // const lines = splitLines(text);
-  let lines = splitLines(text);
-  console.log(lines);
-  // We handle the “error” of parsing an Excel cell with a line break inside
-  lines = ((lines) => {
-    let res = [];
-    let buffer = "";
-    lines.forEach((line) => {
-      buffer += (buffer === "" ? "" : "\n") + line;
-      const quoteCount = (buffer.match(/"/g) || []).length;
-      if (quoteCount % 2 === 0) {
-        res.push(buffer);
-        buffer = "";
-      }
-    });
-    return res;
-  })(lines);
-  console.log(lines);
-  //
+  const section = document.getElementById(`results_${year}`);
+  section.innerHTML = `<div class="loading">Загрузка результатов...</div>`;
 
-  const tables = parseTables(lines);
+  try {
+    const text = await loadCSV(year);
 
-  const html = buildTablesHTML(tables);
+    const rows = parseCSV(text);
 
-  const section = getResultsSection(year);
+    const tables = parseTables(rows);
 
-  insertHTML(section, html);
+    const html = buildTablesHTML(tables);
+    section.innerHTML = html;
+  } catch (error) {
+    console.error(`Failed to load results: ${error}`, error);
+    section.innerHTML = `<div class="error">Ошибка загрузки результатов</div>`;
+  }
 
-  /* =========================
-     LOAD CSV
-  ========================= */
+  // const section = getResultsSection(year);
+}
 
-  async function loadCSV(year) {
+/* =========================
+   LOAD CSV
+========================= */
+
+const csvCache = {};
+
+async function loadCSV(year) {
+  if (csvCache[year]) return csvCache[year];
+
+  try {
     const response = await fetch(`js/results_${year}.csv`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
     const buffer = await response.arrayBuffer();
 
-    return decodeBuffer(buffer);
-  }
+    const text = decodeBuffer(buffer);
 
-  function decodeBuffer(buffer) {
-    try {
-      return new TextDecoder("utf-8", { fatal: true }).decode(buffer);
-    } catch {
-      return new TextDecoder("windows-1251").decode(buffer);
+    csvCache[year] = text;
+
+    return text;
+  } catch (error) {
+    console.error(`Failed to load CSV for ${year}`, error);
+    throw error;
+  }
+}
+
+function decodeBuffer(buffer) {
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(buffer);
+  } catch {
+    return new TextDecoder("windows-1251").decode(buffer);
+  }
+}
+
+/* =========================
+   CSV PARSER (REGEX TOKENIZER)
+========================= */
+
+function parseCSV(text) {
+  const rows = [];
+
+  const pattern = /("(?:[^"]|"")*"|[^,\n]*)(,|\n|$)/g;
+
+  let row = [];
+
+  text.replace(pattern, (match, cell, separator) => {
+    if (cell.startsWith('"')) {
+      cell = cell.slice(1, -1).replace(/""/g, '"');
     }
-  }
 
-  /* =========================
-     TEXT PROCESSING
-  ========================= */
+    row.push(cell);
 
-  function splitLines(text) {
-    return text.trim().split("\n");
-  }
+    if (separator === "\n" || separator === "") {
+      rows.push(row);
+      row = [];
+    }
 
-  function parseHeaders(cells) {
-    return cells.slice(1).map((c) => c.trim());
-  }
+    return "";
+  });
 
-  function parseRow(cells) {
-    const _cells = cells.slice(1).map((c) => c.trim().replaceAll('"', ""));
-    console.log(_cells);
-    return _cells;
-  }
+  return rows;
+}
 
-  /* =========================
-     PARSER
-  ========================= */
+/* =========================
+   TABLE PARSER (STATE MACHINE)
+========================= */
 
-  function parseTables(lines) {
-    let currentSport = "";
-    let currentTournament = "";
-    let currentHeaders = [];
-    let currentRows = [];
+function parseTables(rows) {
+  const tables = [];
 
-    const tables = [];
+  let table = null;
 
-    for (const line of lines) {
-      const cells = line.split(",");
+  for (const cells of rows) {
+    const type = cells[0]?.trim();
 
-      const type = cells[0]?.trim();
-
-      if (type === "Sport") {
+    switch (type) {
+      case "Sport":
         pushTable();
 
-        currentSport = cells[1]?.trim() || "";
+        table = {
+          sport: cells[1]?.trim() || "",
+          tournament: "",
+          headers: [],
+          rows: []
+        };
 
-        resetTable();
-      } else if (type === "Tournament") {
-        pushTable();
+        break;
 
-        currentTournament = cells[1]?.trim() || "";
+      case "Tournament":
+        if (table) {
+          table.tournament = cells[1]?.trim() || "";
+        }
 
-        resetTable();
-      } else if (type === "Headers") {
-        currentHeaders = parseHeaders(cells);
-      } else if (type === "Row") {
-        currentRows.push(parseRow(cells));
-      }
-    }
+        break;
 
-    pushTable();
+      case "Headers":
+        if (table) {
+          table.headers = cells.slice(1).map((c) => c.trim());
+        }
 
-    return tables;
+        break;
 
-    function pushTable() {
-      if (currentHeaders.length && currentRows.length) {
-        tables.push({
-          sport: currentSport,
-          tournament: currentTournament,
-          headers: currentHeaders,
-          rows: currentRows
-        });
-      }
-    }
+      case "Row":
+        if (table) {
+          table.rows.push(cells.slice(1).map((c) => c.trim()));
+        }
 
-    function resetTable() {
-      currentHeaders = [];
-      currentRows = [];
+        break;
     }
   }
 
-  /* =========================
-     HTML BUILDING
-  ========================= */
+  pushTable();
 
-  function buildTablesHTML(tables) {
-    return tables.map(buildTableHTML).join("");
+  return tables;
+
+  function pushTable() {
+    if (table && table.headers.length && table.rows.length) {
+      tables.push(table);
+    }
   }
+}
 
-  function buildTableHTML(table) {
-    return `
+/* =========================
+   HTML BUILDING
+========================= */
+
+function buildTablesHTML(tables) {
+  return tables.map(buildTableHTML).join("");
+}
+
+function buildTableHTML(table) {
+  return `
 <table class="results_table">
 
 <caption>
@@ -161,12 +177,12 @@ ${table.rows.map(buildRowHTML).join("")}
 
 </table>
 `;
-  }
+}
 
-  function buildRowHTML(row) {
-    const placeClass = getPlaceClass(row[0]);
+function buildRowHTML(row) {
+  const placeClass = getPlaceClass(row[row.length - 1]);
 
-    return `
+  return `
 <tr>
 
 ${row
@@ -181,35 +197,30 @@ ${cell.replaceAll("\n", "<br>")}
 
 </tr>
 `;
-  }
+}
 
-  /* =========================
-     DOM
-  ========================= */
+/* =========================
+   DOM
+========================= */
 
-  function getResultsSection(year) {
-    const section = document.getElementById(`results_${year}`);
+// function getResultsSection(year) {
+//   const section = document.getElementById(`results_${year}`);
 
-    if (!section) {
-      throw new Error(`results_${year} not found`);
-    }
+//   if (!section) {
+//     throw new Error(`results_${year} not found`);
+//   }
 
-    return section;
-  }
+//   return section;
+// }
 
-  function insertHTML(el, html) {
-    el.innerHTML = html;
-  }
+/* =========================
+   UTIL
+========================= */
 
-  /* =========================
-     UTIL
-  ========================= */
+function getPlaceClass(place) {
+  if (place === "1") return "place-1";
+  if (place === "2") return "place-2";
+  if (place === "3") return "place-3";
 
-  function getPlaceClass(place) {
-    if (place === "1") return "place-1";
-    if (place === "2") return "place-2";
-    if (place === "3") return "place-3";
-
-    return "";
-  }
+  return "";
 }
